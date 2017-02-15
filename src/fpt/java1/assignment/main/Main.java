@@ -17,21 +17,30 @@ public class Main {
 
     private static int temp;
 
+    public static void exit() {
+        System.out.println("--- Tam biet ! Cam on ban da su dung chuong trinh ---");
+        System.exit(0);
+    }
+
     public static void main(String[] args) {
-        boolean flag = true;
-        while (flag) {
+        while (true) {
             try {
                 input();
                 temp = new Scanner(System.in).nextInt();
                 if (temp > 0 && temp < 6) {
-                    flag = false;
-                } else {
-                    System.out.println(" Loi : !!! Ban hay nhap gia tri tu 1-5 !!!");
+                    if (temp == 5) {
+                        exit();
+                    }
+                }
+                start(temp);
+                System.out.print("Ban co muon tiep tuc khong (Y/N) ?? : ");
+                String tmp = new Scanner(System.in).nextLine().trim();
+                if (tmp.equals("N") || tmp.equals("n")) {
+                    exit();
                 }
             } catch (Exception e) {
                 System.out.println(" Loi : !!! Ban hay nhap gia tri so !!!");
             }
         }
-        start(temp);
     }
 }
