@@ -5,7 +5,9 @@
  */
 package fpt.java1.assignment.controller;
 
+import fpt.java1.assignment.dao.UserDAO;
 import fpt.java1.assignment.model.User;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -13,6 +15,7 @@ import java.util.Scanner;
  * @author Thinh Nguyen
  */
 public class Controller {
+    private static User objUser;
 
     public static void input() {
         System.out.println("-------------------------------------------------");
@@ -28,12 +31,11 @@ public class Controller {
     }
 
     public static User addUser() {
-        User objUser = new User();
         System.out.println("-------------------------------------------------");
         System.out.println("|**************** Them moi User *****************|");
         System.out.println("-------------------------------------------------");
         System.out.print("Nhap User ID : ");
-        objUser.setId(new Scanner(System.in).nextInt());
+        objUser.setId(new Scanner(System.in).nextLine());
         System.out.print("Nhap Ten User : ");
         objUser.setName(new Scanner(System.in).nextLine());
         System.out.print("Nhap username : ");
@@ -44,34 +46,65 @@ public class Controller {
         return objUser;
     }
     
-    public static void showAll() {
-        System.out.println("----cho nay se show het danh sach user ra ------");
+    public static void showAll(ArrayList<User> listUser) {
+        System.out.println("-------------------------------------------------");
+        System.out.println("|**************** Danh sach User ****************|");
+        System.out.println("-------------------------------------------------");
+        listUser.forEach((user) -> {
+            System.out.println(user);
+        });
     }
     
-    public static User changeUser() {
-        User objUser = new User();
+    public static User loadUser() {
+        User tmpUser = new User();
         System.out.println("-------------------------------------------------");
         System.out.println("|************** Sua thong tin User **************|");
         System.out.println("-------------------------------------------------");
         System.out.print("Nhap User ID : ");
-        objUser.setId(new Scanner(System.in).nextInt());
-        System.out.print("Nhap Ten User : ");
-        objUser.setName(new Scanner(System.in).nextLine());
-        System.out.print("Nhap username : ");
-        objUser.setUsername(new Scanner(System.in).nextLine());
-        System.out.print("Nhap password : ");
-        objUser.setPassword(new Scanner(System.in).nextLine());
-        objUser.setStatus(true);
-        return objUser;
+        String id = new Scanner(System.in).nextLine();
+        if (UserDAO.checkExistUser(id)) {
+            tmpUser.setId(id);
+            System.out.print("Nhap Ten User moi : ");
+            tmpUser.setName(new Scanner(System.in).nextLine());
+            System.out.print("Nhap username moi : ");
+            tmpUser.setUsername(new Scanner(System.in).nextLine());
+            System.out.print("Nhap password moi : ");
+            tmpUser.setPassword(new Scanner(System.in).nextLine());
+            tmpUser.setStatus(true);
+            return tmpUser;
+        } else {
+            System.out.println("Loi : Khong ton tai User voi id = " + id);
+            return tmpUser;
+        }
     }
+//    
+//    private static User newUser(String id) {
+//        objUser.setId(id);
+//        System.out.print("Nhap Ten User moi : ");
+//        objUser.setName(new Scanner(System.in).nextLine());
+//        System.out.print("Nhap username moi : ");
+//        objUser.setUsername(new Scanner(System.in).nextLine());
+//        System.out.print("Nhap password moi : ");
+//        objUser.setPassword(new Scanner(System.in).nextLine());
+//        objUser.setStatus(true);
+//        return objUser;
+//    }
     
-    public static int deleteUser() {
+    public static User deleteUser() {
+        User tmpUser = new User();
         System.out.println("-------------------------------------------------");
-        System.out.println("|************** Sua thong tin User **************|");
+        System.out.println("|************** Xoa thong tin User **************|");
         System.out.println("-------------------------------------------------");
-        System.out.print("Nhap User ID can xoa : ");
-        int temp = new Scanner(System.in).nextInt();
-        return temp;
+        System.out.print("Nhap User ID : ");
+        String id = new Scanner(System.in).nextLine();
+        if (UserDAO.checkExistUser(id)) {
+            tmpUser.setId(id);
+            UserDAO.deleteUser(tmpUser);
+            return tmpUser;
+        } else {
+            System.out.println("Loi : Khong ton tai User voi id = " + id);
+            return tmpUser;
+        }
     }
     
     public static void exit() {
@@ -80,17 +113,19 @@ public class Controller {
     }
 
     public static void start(int temp) {
-        User objUser;
+        ArrayList<User> listUser;
         switch (temp) {
             case 1:
                 objUser = addUser();
-                System.out.println(objUser);
+                UserDAO.insertUser(objUser);
                 break;
             case 2:
-                showAll();
+                listUser = UserDAO.showAllUser();
+                showAll(listUser);
                 break;
             case 3:
-                changeUser();
+                objUser = loadUser();
+                UserDAO.update1User(objUser);
                 break;
             case 4:
                 deleteUser();
@@ -99,7 +134,7 @@ public class Controller {
                 exit();
                 break;
             default:
-                System.out.println("Dong nay khong bao gio in ra dau =))");
+                System.out.println(" Loi : !!! Ban hay nhap gia tri tu 1-5 !!!");
                 break;
         }
     }

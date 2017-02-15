@@ -10,17 +10,17 @@ package fpt.java1.assignment.model;
  * @author Thinh Nguyen
  */
 public class User {
-    private int id;
+    private String id;
     private String name;
     private String username;
     private String password;
     private boolean status;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -58,6 +58,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", status=" + status + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + '}';
     }
 }
