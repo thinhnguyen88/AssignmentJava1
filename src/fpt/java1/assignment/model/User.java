@@ -14,7 +14,7 @@ public class User {
     private String name;
     private String username;
     private String password;
-    private String status;
+    private boolean status;
 
     public int getId() {
         return id;
@@ -48,16 +48,16 @@ public class User {
         this.password = password;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return "User{" + "id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", status=" + status + '}';
     }
 }
