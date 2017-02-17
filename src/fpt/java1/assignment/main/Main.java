@@ -5,8 +5,8 @@
  */
 package fpt.java1.assignment.main;
 
-import static fpt.java1.assignment.controller.Controller.input;
-import static fpt.java1.assignment.controller.Controller.start;
+import static fpt.java1.assignment.controller.UserController.input;
+import static fpt.java1.assignment.controller.UserController.start;
 import java.util.Scanner;
 
 /**

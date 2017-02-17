@@ -14,56 +14,65 @@ import java.util.Scanner;
  *
  * @author Thinh Nguyen
  */
-public class Controller {
+public class UserController {
     private static User objUser;
 
     public static void input() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("|********* Chuong trinh quan ly User ***********|");
-        System.out.println("-------------------------------------------------");
-        System.out.println("| 1. Them moi User                              |");
-        System.out.println("| 2. Hien thi danh sach User                    |");
-        System.out.println("| 3. Sua thong tin User                         |");
-        System.out.println("| 4. Xoa User                                   |");
-        System.out.println("| 5. Tim kiem User                              |");
-        System.out.println("| 6. Thoat                                      |");
-        System.out.println("-------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("|******************** Chuong trinh quan ly User ********************|");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("|   1. Them moi User                                                |");
+        System.out.println("|   2. Hien thi danh sach User                                      |");
+        System.out.println("|   3. Sua thong tin User                                           |");
+        System.out.println("|   4. Xoa User                                                     |");
+        System.out.println("|   5. Tim kiem User                                                |");
+        System.out.println("|   6. Thoat                                                        |");
+        System.out.println("--------------------------------------------------------------------");
         System.out.print("| Chon :  ");
     }
 
     public static User addUser() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("|**************** Them moi User *****************|");
-        System.out.println("-------------------------------------------------");
+        User tmpUser = new User();
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("|************************* Them moi User ***************************|");
+        System.out.println("--------------------------------------------------------------------");
         System.out.print("Nhap User ID : ");
-        objUser.setId(new Scanner(System.in).nextLine());
+        tmpUser.setId(new Scanner(System.in).nextLine());
         System.out.print("Nhap Ten User : ");
-        objUser.setName(new Scanner(System.in).nextLine());
+        tmpUser.setName(new Scanner(System.in).nextLine());
         System.out.print("Nhap username : ");
-        objUser.setUsername(new Scanner(System.in).nextLine());
+        tmpUser.setUsername(new Scanner(System.in).nextLine());
         System.out.print("Nhap password : ");
-        objUser.setPassword(new Scanner(System.in).nextLine());
-        objUser.setStatus(true);
-        return objUser;
+        tmpUser.setPassword(new Scanner(System.in).nextLine());
+        tmpUser.setStatus(true);
+        return tmpUser;
     }
     
     public static void showAll(ArrayList<User> listUser) {
-        System.out.println("-------------------------------------------------");
-        System.out.println("|**************** Danh sach User ****************|");
-        System.out.println("-------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("|************************** Danh sach User *************************|");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("|  ID  |           Name           |    Username    |    Password    |");
+        System.out.println("--------------------------------------------------------------------");
         listUser.forEach((user) -> {
             System.out.println(user);
         });
+        System.out.println("--------------------------------------------------------------------");
     }
     
     public static User loadUser() {
         User tmpUser = new User();
-        System.out.println("-------------------------------------------------");
-        System.out.println("|************** Sua thong tin User **************|");
-        System.out.println("-------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("|************************ Sua thong tin User ***********************|");
+        System.out.println("--------------------------------------------------------------------");
         System.out.print("Nhap User ID : ");
         String id = new Scanner(System.in).nextLine();
         if (UserDAO.checkExistUser(id)) {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("|  ID  |           Name           |    Username    |    Password    |");
+            System.out.println("--------------------------------------------------------------------");
+            UserDAO.loadUser(id);
+            System.out.println("--------------------------------------------------------------------");
             tmpUser.setId(id);
             System.out.print("Nhap Ten User moi : ");
             tmpUser.setName(new Scanner(System.in).nextLine());
@@ -74,15 +83,15 @@ public class Controller {
             tmpUser.setStatus(true);
             return tmpUser;
         } else {
-            System.out.println("Loi : Khong ton tai User voi id = " + id);
+            System.out.println("****** Loi : Khong ton tai User voi id = " + id + "*****");
             return tmpUser;
         }
     }
     
     public static void findUser() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("|************** Tim thong tin User **************|");
-        System.out.println("-------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("|*********************** Tim thong tin User ************************|");
+        System.out.println("--------------------------------------------------------------------");
         System.out.print("Nhap User ID : ");
         String id = new Scanner(System.in).nextLine();
         if (UserDAO.checkExistUser(id)) {
@@ -106,9 +115,9 @@ public class Controller {
     
     public static User deleteUser() {
         User tmpUser = new User();
-        System.out.println("-------------------------------------------------");
-        System.out.println("|************** Xoa thong tin User **************|");
-        System.out.println("-------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("|************************ Xoa thong tin User ***********************|");
+        System.out.println("--------------------------------------------------------------------");
         System.out.print("Nhap User ID : ");
         String id = new Scanner(System.in).nextLine();
         if (UserDAO.checkExistUser(id)) {
