@@ -18,58 +18,58 @@ import java.sql.Statement;
  * @author Thinh Nguyen
  */
 public class DBUtil {
-    
+
     public static void closeAll(PreparedStatement pstm, Connection con, ResultSet rs) {
-        if(pstm != null) {
+        if (pstm != null) {
             try {
                 pstm.close();
             } catch (SQLException e) {
             }
         }
-        if(con != null) {
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
             }
         }
-        if(rs != null) {
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
             }
         }
     }
-    
+
     public static void closeAll(PreparedStatement pstm, Connection con) {
-        if(pstm != null) {
+        if (pstm != null) {
             try {
                 pstm.close();
             } catch (SQLException e) {
             }
         }
-        if(con != null) {
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
             }
         }
     }
-    
+
     public static void closeAll(Statement stm, Connection con) {
-        if(stm != null) {
+        if (stm != null) {
             try {
                 stm.close();
             } catch (SQLException e) {
             }
         }
-        if(con != null) {
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
             }
         }
     }
-    
+
     public static Connection openConnection() {
         Connection con = null;
         Gconfig cfig = new Gconfig();
@@ -80,8 +80,5 @@ public class DBUtil {
             System.out.println("Connection DB Failed : " + e.getMessage());
         }
         return con;
-    }
-    public static void main(String[] args) {
-        System.out.println(openConnection());
     }
 }
