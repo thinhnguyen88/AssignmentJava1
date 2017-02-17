@@ -22,8 +22,8 @@ public class UserDAO {
     private static User objUser;
 
     public static void insertUser(User objUser) {
-        Connection con;
-        PreparedStatement pstm;
+        Connection con = null;
+        PreparedStatement pstm = null;
         try {
             con = DBUtil.openConnection();
             pstm = con.prepareStatement("insert into T_User values (?,?,?,?,?)");
@@ -36,12 +36,14 @@ public class UserDAO {
             System.out.println("Insert User " + objUser.getName() + " Success !!!");
         } catch (SQLException e) {
             System.out.println("Loi insert DB : " + e.getMessage());
+        } finally {
+            DBUtil.closeAll(pstm, con);
         }
     }
 
     public static void deleteUser(User objUser) {
-        Connection con;
-        PreparedStatement pstm;
+        Connection con = null;
+        PreparedStatement pstm = null;
         try {
             con = DBUtil.openConnection();
             pstm = con.prepareStatement("delete from T_User where id = ?");
@@ -50,14 +52,16 @@ public class UserDAO {
             System.out.println("Delete User voi id = " + objUser.getId() + " Success !!!");
         } catch (SQLException e) {
             System.out.println("Loi DB : " + e.getMessage());
+        } finally {
+            DBUtil.closeAll(pstm, con);
         }
     }
 
     public static ArrayList<User> showAllUser() {
         ArrayList<User> listUser = new ArrayList<>();
-        Connection con;
-        PreparedStatement pstm;
-        ResultSet rs;
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
         try {
             con = DBUtil.openConnection();
             pstm = con.prepareStatement("Select * from T_User");
@@ -74,6 +78,8 @@ public class UserDAO {
             }
         } catch (SQLException e) {
             System.out.println("Loi insert DB : " + e.getMessage());
+        } finally {
+            DBUtil.closeAll(pstm, con, rs);
         }
         return listUser;
     }
@@ -81,8 +87,8 @@ public class UserDAO {
     public static boolean checkExistUser(String id) {
         boolean flag = false;
         Connection con = DBUtil.openConnection();
-        PreparedStatement pstm;
-        ResultSet rs;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
         try {
             pstm = con.prepareStatement("select * from T_User where id = ?");
             pstm.setString(1, id);
@@ -91,14 +97,16 @@ public class UserDAO {
                 flag = true;
             }
         } catch (SQLException e) {
+        } finally {
+            DBUtil.closeAll(pstm, con, rs);
         }
         return flag;
     }
 
     public static void loadUser(String id) {
         Connection con = DBUtil.openConnection();
-        PreparedStatement pstm;
-        ResultSet rs;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
         try {
             pstm = con.prepareStatement("select * from T_User where id = ?");
             pstm.setString(1, id);
@@ -113,12 +121,14 @@ public class UserDAO {
                 System.out.println(tmpUser);
             }
         } catch (SQLException e) {
+        } finally {
+            DBUtil.closeAll(pstm, con, rs);
         }
     }
 
     public static void update1User(User objUserNew) {
         Connection con = DBUtil.openConnection();
-        PreparedStatement pstm;
+        PreparedStatement pstm = null;
         try {
             pstm = con.prepareStatement("update T_USER set name = ? , username = ? , password = ? where id = ?");
             pstm.setString(1, objUserNew.getName());
@@ -130,6 +140,8 @@ public class UserDAO {
                 System.out.println("Ban da update thanh cong User voi id = " + objUserNew.getId());
             }
         } catch (SQLException e) {
+        } finally {
+            DBUtil.closeAll(pstm, con);
         }
     }
 

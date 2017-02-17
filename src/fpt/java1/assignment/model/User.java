@@ -58,6 +58,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + '}';
+        return String.format("|%-5s |%-25s |%-15s |%-16s|", id, name, username, password);
     }
 }
