@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * @author Thinh Nguyen
  */
 public class UserDAO {
+
     private static User objUser;
 
     public static void insertUser(User objUser) {
@@ -37,7 +38,7 @@ public class UserDAO {
             System.out.println("Loi insert DB : " + e.getMessage());
         }
     }
-    
+
     public static void deleteUser(User objUser) {
         Connection con;
         PreparedStatement pstm;
@@ -46,7 +47,7 @@ public class UserDAO {
             pstm = con.prepareStatement("delete from T_User where id = ?");
             pstm.setString(1, objUser.getId());
             pstm.execute();
-            System.out.println("Delete User voi id = " + objUser.getId()+ " Success !!!");
+            System.out.println("Delete User voi id = " + objUser.getId() + " Success !!!");
         } catch (SQLException e) {
             System.out.println("Loi DB : " + e.getMessage());
         }
@@ -86,14 +87,35 @@ public class UserDAO {
             pstm = con.prepareStatement("select * from T_User where id = ?");
             pstm.setString(1, id);
             rs = pstm.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 flag = true;
             }
         } catch (SQLException e) {
         }
         return flag;
     }
-    
+
+    public static void loadUser(String id) {
+        Connection con = DBUtil.openConnection();
+        PreparedStatement pstm;
+        ResultSet rs;
+        try {
+            pstm = con.prepareStatement("select * from T_User where id = ?");
+            pstm.setString(1, id);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                User tmpUser = new User();
+                tmpUser.setId(rs.getString(1));
+                tmpUser.setName(rs.getString(2));
+                tmpUser.setUsername(rs.getString(3));
+                tmpUser.setPassword(rs.getString(4));
+                tmpUser.setStatus(true);
+                System.out.println(tmpUser);
+            }
+        } catch (SQLException e) {
+        }
+    }
+
     public static void update1User(User objUserNew) {
         Connection con = DBUtil.openConnection();
         PreparedStatement pstm;
@@ -104,11 +126,11 @@ public class UserDAO {
             pstm.setString(3, objUserNew.getPassword());
             pstm.setString(4, objUserNew.getId());
             int i = pstm.executeUpdate();
-            if(i==1) {
-                System.out.println("Ban da update thanh cong User voi id = " + objUserNew.getId() );
+            if (i == 1) {
+                System.out.println("Ban da update thanh cong User voi id = " + objUserNew.getId());
             }
         } catch (SQLException e) {
         }
     }
-    
+
 }
