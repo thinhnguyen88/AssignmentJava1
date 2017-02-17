@@ -25,7 +25,8 @@ public class Controller {
         System.out.println("| 2. Hien thi danh sach User                    |");
         System.out.println("| 3. Sua thong tin User                         |");
         System.out.println("| 4. Xoa User                                   |");
-        System.out.println("| 5. Thoat                                      |");
+        System.out.println("| 5. Tim kiem User                              |");
+        System.out.println("| 6. Thoat                                      |");
         System.out.println("-------------------------------------------------");
         System.out.print("| Chon :  ");
     }
@@ -75,6 +76,19 @@ public class Controller {
         } else {
             System.out.println("Loi : Khong ton tai User voi id = " + id);
             return tmpUser;
+        }
+    }
+    
+    public static void findUser() {
+        System.out.println("-------------------------------------------------");
+        System.out.println("|************** Tim thong tin User **************|");
+        System.out.println("-------------------------------------------------");
+        System.out.print("Nhap User ID : ");
+        String id = new Scanner(System.in).nextLine();
+        if (UserDAO.checkExistUser(id)) {
+            UserDAO.loadUser(id);
+        } else {
+            System.out.println("Loi : Khong ton tai User voi id = " + id);
         }
     }
 //    
@@ -131,10 +145,13 @@ public class Controller {
                 deleteUser();
                 break;
             case 5:
+                findUser();
+                break;
+            case 6:
                 exit();
                 break;
             default:
-                System.out.println(" Loi : !!! Ban hay nhap gia tri tu 1-5 !!!");
+                System.out.println(" Loi : !!! Ban hay nhap gia tri tu 1-6 !!!");
                 break;
         }
     }

@@ -27,8 +27,8 @@ public class Main {
             try {
                 input();
                 temp = new Scanner(System.in).nextInt();
-                if (temp > 0 && temp < 6) {
-                    if (temp == 5) {
+                if (temp > 0 && temp < 7) {
+                    if (temp == 6) {
                         exit();
                     }
                 }
