@@ -21,6 +21,10 @@ public class UserDAO {
 
     private static User objUser;
 
+    /**
+     * Phuong thuc de them 1 User vao DB
+     * @param objUser : nhan parameter la 1 User
+     */
     public static void insertUser(User objUser) {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -41,6 +45,10 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Phuong thuc dung khi xoa 1 User khoi DB
+     * @param objUser nhan parameter la User
+     */
     public static void deleteUser(User objUser) {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -57,6 +65,10 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Phuong thuc hien thi tat ca User
+     * @return tra ve 1 List cac User
+     */
     public static ArrayList<User> showAllUser() {
         ArrayList<User> listUser = new ArrayList<>();
         Connection con = null;
@@ -84,6 +96,11 @@ public class UserDAO {
         return listUser;
     }
 
+    /**
+     * Phuong thuc kiem tra 1 User co ton tai trong DB hay khong
+     * @param id : nhan vao id cua User
+     * @return : tra ve true neu co ton tai, false neu khong ton tai
+     */
     public static boolean checkExistUser(String id) {
         boolean flag = false;
         Connection con = DBUtil.openConnection();
@@ -103,6 +120,10 @@ public class UserDAO {
         return flag;
     }
 
+    /**
+     * Phuong thuc hien thi thong tin 1 User
+     * @param id : nhan parameter la id cua User can tim
+     */
     public static void loadUser(String id) {
         Connection con = DBUtil.openConnection();
         PreparedStatement pstm = null;
@@ -126,6 +147,10 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Phuong thuc de sua thong tin cua 1 User
+     * @param objUserNew : Doi tuong moi can thay doi
+     */
     public static void update1User(User objUserNew) {
         Connection con = DBUtil.openConnection();
         PreparedStatement pstm = null;
@@ -144,5 +169,4 @@ public class UserDAO {
             DBUtil.closeAll(pstm, con);
         }
     }
-
 }

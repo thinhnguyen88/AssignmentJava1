@@ -11,12 +11,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * Class xu ly cac van de lien quan den Controller
  * @author Thinh Nguyen
  */
 public class UserController {
+
     private static User objUser;
 
+    /**
+     * Phuong thuc input hien thi giao dien ban dau voi nguoi dung
+     */
     public static void input() {
         System.out.println("--------------------------------------------------------------------");
         System.out.println("|******************** Chuong trinh quan ly User ********************|");
@@ -30,7 +34,11 @@ public class UserController {
         System.out.println("--------------------------------------------------------------------");
         System.out.print("| Chon :  ");
     }
-
+    
+    /**
+     * Phuong thuc addUser the hien giao dien khi dung chuc nang addUser
+     * @return se tra ve doi tuong la 1 Object User
+     */
     public static User addUser() {
         User tmpUser = new User();
         System.out.println("--------------------------------------------------------------------");
@@ -48,6 +56,9 @@ public class UserController {
         return tmpUser;
     }
     
+    /**
+     * Phuong thuc showAll the hien giao dien khi in ra toan bo danh sach User
+     */
     public static void showAll(ArrayList<User> listUser) {
         System.out.println("--------------------------------------------------------------------");
         System.out.println("|************************** Danh sach User *************************|");
@@ -59,7 +70,11 @@ public class UserController {
         });
         System.out.println("--------------------------------------------------------------------");
     }
-    
+
+    /**
+     * Phuong thuc loadUser the hien giao dien khi muon thay doi thong tin 1 User
+     * @return se tra ve doi tuong la 1 Object User
+     */
     public static User loadUser() {
         User tmpUser = new User();
         System.out.println("--------------------------------------------------------------------");
@@ -87,7 +102,10 @@ public class UserController {
             return tmpUser;
         }
     }
-    
+
+    /**
+     * Phuong thuc findUser se hien thi ra giao dien khi muon tim kiem 1 User
+     */
     public static void findUser() {
         System.out.println("--------------------------------------------------------------------");
         System.out.println("|*********************** Tim thong tin User ************************|");
@@ -112,7 +130,11 @@ public class UserController {
 //        objUser.setStatus(true);
 //        return objUser;
 //    }
-    
+
+    /**
+     * Phuong thuc deleteUser se the hien giao dien khi muon xoa mot User
+     * @return tra ve doi tuong User
+     */
     public static User deleteUser() {
         User tmpUser = new User();
         System.out.println("--------------------------------------------------------------------");
@@ -129,12 +151,19 @@ public class UserController {
             return tmpUser;
         }
     }
-    
+
+    /**
+     * Phuong thuc exit duoc goi khi thoat chuong tring ( co kem cau chao tam biet !!)
+     */
     public static void exit() {
         System.out.println("--- Tam biet ! Cam on ban da su dung chuong trinh ---");
         System.exit(0);
     }
 
+    /**
+     * Phuong thuc chinh de chay chuong trinh
+     * @param temp : chon tu 1 den 6 tuong ung voi 6 chuc nang cua chuong trinh
+     */
     public static void start(int temp) {
         ArrayList<User> listUser;
         switch (temp) {
